@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON to TOON Converter</title>
+    <meta name="description" content="Convert JSON data to the token-efficient TOON format for LLMs.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <div id="drag-overlay" class="drag-overlay hidden">
+            <div class="drag-content">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <h3>Drop JSON file here</h3>
+            </div>
+        </div>
+
+        <header>
+            <div class="logo">
+                <h1>JSON<span class="accent">TOON</span>IZER</h1>
+                <p class="subtitle">Optimize your data for the AI era</p>
+            </div>
+            <div class="actions">
+                <button id="example-btn" class="btn secondary">Load Example</button>
+            </div>
+        </header>
+
+        <main class="converter-workspace">
+            <section class="panel input-panel">
+                <div class="panel-header">
+                    <h2>JSON Input</h2>
+                    <span class="badge">Input</span>
+                </div>
+                <div class="editor-container">
+                    <textarea id="json-input" placeholder="Paste your JSON here or drag & drop a file..."
+                        spellcheck="false"></textarea>
+                </div>
+                <div class="panel-footer">
+                    <span id="json-stats" class="stats">0 chars</span>
+                </div>
+            </section>
+
+            <div class="controls">
+                <button id="convert-btn" class="btn primary big-btn" title="Convert JSON to TOON">
+                    <span>Convert</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M13 17l5-5-5-5M6 17l5-5-5-5" />
+                    </svg>
+                </button>
+                <button id="reverse-btn" class="btn secondary big-btn" title="Convert TOON to JSON">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 17l-5-5 5-5M18 17l-5-5 5-5" />
+                    </svg>
+                    <span>Reverse</span>
+                </button>
+            </div>
+
+            <section class="panel output-panel">
+                <div class="panel-header">
+                    <h2>TOON Output</h2>
+                    <span class="badge">Output</span>
+                </div>
+                <div class="editor-container">
+                    <!-- Changed to div for syntax highlighting -->
+                    <div id="toon-output" class="code-editor" contenteditable="true" spellcheck="false"></div>
+                    <textarea id="toon-output-raw" class="hidden"></textarea>
+                    <!-- Hidden textarea for copy/download logic if needed, or just use div text -->
+                </div>
+                <div class="panel-footer">
+                    <div class="stats-container">
+                        <span id="toon-stats" class="stats">0 chars</span>
+                        <span id="token-stats" class="stats highlight">~0 tokens</span>
+                        <span id="savings-stats" class="stats success">0% saved</span>
+                    </div>
+                    <div class="output-actions">
+                        <button id="copy-btn" class="btn icon-btn" title="Copy to Clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2-2v1"></path>
+                            </svg>
+                        </button>
+                        <button id="download-btn" class="btn icon-btn" title="Download .toon file">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
