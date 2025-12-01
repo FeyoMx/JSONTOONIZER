@@ -340,3 +340,27 @@ textarea::placeholder {
         height: 400px;
     }
 }
+
+footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+footer .accent {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+footer a:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
